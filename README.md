@@ -77,17 +77,7 @@ Locked test vector hash:
 
 ## Specification
 
-The local build specification is currently stored at:
-
-```text
-/Users/warre/Omega/omega-contracts-spec/SPEC.md
-```
-
-The public documentation target is:
-
-```text
-https://omegaprotocol.org/contracts/
-```
+Full specification will be published at https://omegaprotocol.org/contracts/.
 
 ## License
 

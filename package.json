@@ -39,7 +39,7 @@
     "ai-safety",
     "interoperability"
   ],
-  "author": "",
+  "author": "Warren Smith",
   "license": "MIT",
   "type": "module",
   "dependencies": {
