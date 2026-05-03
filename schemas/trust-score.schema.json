@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://omegaprotocol.org/schemas/trust-score.schema.json",
+  "title": "TrustScore",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "actor_id",
+    "computed_at",
+    "overall_score",
+    "overall_availability",
+    "dimensions",
+    "evidence_sources",
+    "decay_applied"
+  ],
+  "properties": {
+    "actor_id": {
+      "type": "string"
+    },
+    "computed_at": {
+      "type": "string"
+    },
+    "overall_score": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "overall_availability": {
+      "$ref": "data-availability.schema.json"
+    },
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "transparency",
+        "calibration",
+        "consistency",
+        "consent_compliance",
+        "harm_record",
+        "assumption_discipline",
+        "dispute_record",
+        "ethics_record"
+      ],
+      "properties": {
+        "transparency": {
+          "$ref": "dimension-score.schema.json"
+        },
+        "calibration": {
+          "$ref": "dimension-score.schema.json"
+        },
+        "consistency": {
+          "$ref": "dimension-score.schema.json"
+        },
+        "consent_compliance": {
+          "$ref": "dimension-score.schema.json"
+        },
+        "harm_record": {
+          "$ref": "dimension-score.schema.json"
+        },
+        "assumption_discipline": {
+          "$ref": "dimension-score.schema.json"
+        },
+        "dispute_record": {
+          "$ref": "dimension-score.schema.json"
+        },
+        "ethics_record": {
+          "$ref": "dimension-score.schema.json"
+        }
+      }
+    },
+    "evidence_sources": {
+      "type": "array",
+      "items": {
+        "$ref": "trust-evidence.schema.json"
+      }
+    },
+    "decay_applied": {
+      "type": "boolean"
+    },
+    "provenance": {
+      "type": "array",
+      "items": {
+        "$ref": "derived-field-provenance.schema.json"
+      }
+    }
+  }
+}

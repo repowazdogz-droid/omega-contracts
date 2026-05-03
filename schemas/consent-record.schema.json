@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://omegaprotocol.org/schemas/consent-record.schema.json",
+  "title": "ConsentRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "total_actions",
+    "violations",
+    "violations_by_severity",
+    "scope_creep_detected",
+    "scope_creep_pattern_count",
+    "authorisations_active",
+    "authorisations_expired",
+    "source_chain_verified",
+    "availability"
+  ],
+  "properties": {
+    "total_actions": {
+      "type": "number"
+    },
+    "violations": {
+      "type": "number"
+    },
+    "violations_by_severity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "critical",
+        "major",
+        "minor"
+      ],
+      "properties": {
+        "critical": {
+          "type": "number"
+        },
+        "major": {
+          "type": "number"
+        },
+        "minor": {
+          "type": "number"
+        }
+      }
+    },
+    "scope_creep_detected": {
+      "type": "boolean"
+    },
+    "scope_creep_pattern_count": {
+      "type": "number"
+    },
+    "authorisations_active": {
+      "type": "number"
+    },
+    "authorisations_expired": {
+      "type": "number"
+    },
+    "source_chain_verified": {
+      "type": "boolean"
+    },
+    "availability": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "data-availability.schema.json"
+      }
+    },
+    "provenance": {
+      "type": "array",
+      "items": {
+        "$ref": "derived-field-provenance.schema.json"
+      }
+    }
+  }
+}

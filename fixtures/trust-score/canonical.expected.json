@@ -1,0 +1,109 @@
+{
+  "actor_id": "dr_smith_001",
+  "computed_at": "2026-05-03T12:00:00Z",
+  "overall_score": 0.76,
+  "overall_availability": "available",
+  "dimensions": {
+    "transparency": {
+      "raw_score": 0.88,
+      "score": 0.88,
+      "confidence": 0.72,
+      "evidence_count": 2,
+      "last_updated": "2026-05-03T12:00:00Z",
+      "availability": "available"
+    },
+    "calibration": {
+      "raw_score": null,
+      "score": null,
+      "confidence": 0,
+      "evidence_count": 0,
+      "last_updated": "2026-05-03T12:00:00Z",
+      "availability": "insufficient_history"
+    },
+    "consistency": {
+      "raw_score": null,
+      "score": null,
+      "confidence": 0,
+      "evidence_count": 0,
+      "last_updated": "2026-05-03T12:00:00Z",
+      "availability": "insufficient_history"
+    },
+    "consent_compliance": {
+      "raw_score": 0.82,
+      "score": 0.82,
+      "confidence": 0.72,
+      "evidence_count": 2,
+      "last_updated": "2026-05-03T12:00:00Z",
+      "availability": "available"
+    },
+    "harm_record": {
+      "raw_score": 0.74,
+      "score": 0.74,
+      "confidence": 0.72,
+      "evidence_count": 2,
+      "last_updated": "2026-05-03T12:00:00Z",
+      "availability": "available"
+    },
+    "assumption_discipline": {
+      "raw_score": 0.68,
+      "score": 0.68,
+      "confidence": 0.72,
+      "evidence_count": 2,
+      "last_updated": "2026-05-03T12:00:00Z",
+      "availability": "available"
+    },
+    "dispute_record": {
+      "raw_score": 0.71,
+      "score": 0.71,
+      "confidence": 0.72,
+      "evidence_count": 2,
+      "last_updated": "2026-05-03T12:00:00Z",
+      "availability": "available"
+    },
+    "ethics_record": {
+      "raw_score": 0.79,
+      "score": 0.79,
+      "confidence": 0.72,
+      "evidence_count": 2,
+      "last_updated": "2026-05-03T12:00:00Z",
+      "availability": "available"
+    }
+  },
+  "evidence_sources": [
+    {
+      "source_type": "clearpath_trace",
+      "source_id": "cp_003",
+      "weight": 0.18,
+      "recorded_at": "2026-05-03T12:00:00Z",
+      "reference_record_id": "01HZX1F8Q7M5VK2N9P3R6S8T4Y"
+    },
+    {
+      "source_type": "consent_ledger",
+      "source_id": "cnl_002",
+      "weight": 0.12,
+      "recorded_at": "2026-05-03T12:00:00Z",
+      "reference_record_id": "01HZX1F8Q7M5VK2N9P3R6S8T4Y"
+    },
+    {
+      "source_type": "assumption_registry",
+      "source_id": "arp_002",
+      "weight": 0.1,
+      "recorded_at": "2026-05-03T12:00:00Z",
+      "reference_record_id": "01HZX1F8Q7M5VK2N9P3R6S8T4Y"
+    }
+  ],
+  "decay_applied": false,
+  "provenance": [
+    {
+      "field": "overall_score",
+      "method": "availability-aware mean over available dimensions",
+      "inputs": [
+        "ts_001",
+        "ts_002",
+        "ts_003"
+      ],
+      "confidence": 0.72,
+      "input_fingerprint": "bf9d14a015fdf1dbdd220da51530bc9b4cb5fa91b750ce310ba502b59f5285d1"
+    }
+  ]
+}

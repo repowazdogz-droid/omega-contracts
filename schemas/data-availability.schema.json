@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://omegaprotocol.org/schemas/data-availability.schema.json",
+  "title": "DataAvailability",
+  "type": "string",
+  "enum": [
+    "available",
+    "not_collected",
+    "not_applicable",
+    "withheld",
+    "insufficient_history"
+  ]
+}

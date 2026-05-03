@@ -1,0 +1,28 @@
+[
+  {
+    "id": "arp_001",
+    "load_bearing": true,
+    "validated": true,
+    "expired": false,
+    "cascade_risk": false
+  },
+  {
+    "id": "arp_002",
+    "load_bearing": true,
+    "validated": false,
+    "expired": false,
+    "cascade_risk": true
+  },
+  {
+    "id": "arp_003",
+    "load_bearing": false,
+    "validated": false,
+    "expired": true,
+    "cascade_risk": false
+  },
+  {
+    "id": "gate_001",
+    "pre_action_gate": "caution",
+    "reason": "Smoking risk assumption not independently verified today"
+  }
+]

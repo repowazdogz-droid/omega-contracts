@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://omegaprotocol.org/schemas/harm-record.schema.json",
+  "title": "HarmRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "total_incidents",
+    "max_severity",
+    "max_severity_label",
+    "severity_distribution",
+    "remediation_rate",
+    "pending_remediations",
+    "consequence_chain_count",
+    "availability"
+  ],
+  "properties": {
+    "total_incidents": {
+      "type": "number"
+    },
+    "max_severity": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "max_severity_label": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "negligible",
+        "minor",
+        "moderate",
+        "severe",
+        "critical",
+        "catastrophic",
+        null
+      ]
+    },
+    "severity_distribution": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "remediation_rate": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "pending_remediations": {
+      "type": "number"
+    },
+    "consequence_chain_count": {
+      "type": "number"
+    },
+    "availability": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "data-availability.schema.json"
+      }
+    },
+    "provenance": {
+      "type": "array",
+      "items": {
+        "$ref": "derived-field-provenance.schema.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "total_reviews": 3,
+  "outcome_distribution": {
+    "pass": 1,
+    "flag_minor": 1,
+    "flag_major": 0,
+    "flag_critical": 0,
+    "requires_human_review": 1
+  },
+  "unacknowledged_flags": 1,
+  "vulnerable_population_concerns": 1,
+  "weaponisation_concerns": 0,
+  "availability": {
+    "total_reviews": "available",
+    "outcome_distribution": "available"
+  },
+  "provenance": [
+    {
+      "field": "outcome_distribution",
+      "method": "count reviews grouped by outcome",
+      "inputs": [
+        "egp_001",
+        "egp_002",
+        "egp_003"
+      ],
+      "confidence": 1,
+      "input_fingerprint": "f5400727a28e9571bdf6e0a66112eebd2ae5a68159e3f51e4606a89b99350047"
+    }
+  ]
+}

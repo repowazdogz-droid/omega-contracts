@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://omegaprotocol.org/schemas/clearpath-summary.schema.json",
+  "title": "ClearpathSummary",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "total_traces",
+    "verification_failures",
+    "assumption_ratio",
+    "alternatives_considered_avg",
+    "faithfulness_distribution",
+    "availability"
+  ],
+  "properties": {
+    "total_traces": {
+      "type": "number"
+    },
+    "verification_failures": {
+      "type": "number"
+    },
+    "assumption_ratio": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "alternatives_considered_avg": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "faithfulness_distribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "verified_faithful",
+        "narrative",
+        "unverified",
+        "disputed"
+      ],
+      "properties": {
+        "verified_faithful": {
+          "type": "number"
+        },
+        "narrative": {
+          "type": "number"
+        },
+        "unverified": {
+          "type": "number"
+        },
+        "disputed": {
+          "type": "number"
+        }
+      }
+    },
+    "availability": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "data-availability.schema.json"
+      }
+    },
+    "provenance": {
+      "type": "array",
+      "items": {
+        "$ref": "derived-field-provenance.schema.json"
+      }
+    }
+  }
+}

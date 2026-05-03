@@ -1,0 +1,28 @@
+{
+  "total_assumptions": 3,
+  "load_bearing_count": 2,
+  "load_bearing_validated": 1,
+  "validation_ratio": 0.5,
+  "expired_assumptions": 1,
+  "cascade_risks": 1,
+  "pre_action_gate": "caution",
+  "pre_action_reasons": [
+    "Smoking risk assumption not independently verified today"
+  ],
+  "availability": {
+    "validation_ratio": "available",
+    "pre_action_gate": "available"
+  },
+  "provenance": [
+    {
+      "field": "validation_ratio",
+      "method": "load_bearing_validated / load_bearing_count",
+      "inputs": [
+        "arp_001",
+        "arp_002"
+      ],
+      "confidence": 1,
+      "input_fingerprint": "6f4fe0147317a2c46c1f3b75e468fc8d2562abcf77552403c97e6f23a3ece3a4"
+    }
+  ]
+}

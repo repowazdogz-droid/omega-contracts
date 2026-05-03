@@ -1,0 +1,23 @@
+[
+  {
+    "id": "ts_001",
+    "source_type": "clearpath_trace",
+    "source_id": "cp_003",
+    "weight": 0.18,
+    "dimension": "transparency"
+  },
+  {
+    "id": "ts_002",
+    "source_type": "consent_ledger",
+    "source_id": "cnl_002",
+    "weight": 0.12,
+    "dimension": "consent_compliance"
+  },
+  {
+    "id": "ts_003",
+    "source_type": "assumption_registry",
+    "source_id": "arp_002",
+    "weight": 0.1,
+    "dimension": "assumption_discipline"
+  }
+]

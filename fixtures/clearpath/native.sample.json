@@ -1,0 +1,31 @@
+[
+  {
+    "id": "cp_001",
+    "type": "OBSERVE",
+    "text": "MRI shows L4-L5 degenerative disc disease without progressive neurological deficit.",
+    "faithfulness": "verified_faithful"
+  },
+  {
+    "id": "cp_002",
+    "type": "ASSUME",
+    "text": "Smoking increases fusion non-union risk.",
+    "faithfulness": "verified_faithful"
+  },
+  {
+    "id": "cp_003",
+    "type": "DECIDE",
+    "decision": "Recommend non-surgical pathway first.",
+    "alternatives_considered": [
+      "fusion",
+      "decompression",
+      "physiotherapy"
+    ],
+    "faithfulness": "narrative"
+  },
+  {
+    "id": "cp_004",
+    "type": "ACT",
+    "action": "Document conservative care plan.",
+    "faithfulness": "verified_faithful"
+  }
+]

@@ -1,0 +1,35 @@
+{
+  "calibration": null,
+  "bias_count": 2,
+  "growth_trajectory": "stable",
+  "consistency": null,
+  "recurring_biases": [
+    {
+      "bias_type": "intervention_bias",
+      "frequency": 1,
+      "confidence": 0.7
+    },
+    {
+      "bias_type": "availability_bias",
+      "frequency": 1,
+      "confidence": 0.6
+    }
+  ],
+  "availability": {
+    "calibration": "insufficient_history",
+    "consistency": "insufficient_history"
+  },
+  "provenance": [
+    {
+      "field": "bias_count",
+      "method": "count non-null bias annotations",
+      "inputs": [
+        "cl_001",
+        "cl_002",
+        "cl_003"
+      ],
+      "confidence": 0.9,
+      "input_fingerprint": "0f9f43eb79addd938396bfb48ebbc0d9f3c4e4e691dbbd0cce9b2d197389545a"
+    }
+  ]
+}

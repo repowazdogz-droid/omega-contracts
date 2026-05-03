@@ -1,0 +1,371 @@
+{
+  "record_id": "01HZX1F8Q7M5VK2N9P3R6S8T4Y",
+  "schema_version": "omega/1.0",
+  "contracts_version": "0.2.2",
+  "created_at": "2026-05-03T12:00:00Z",
+  "subject": {
+    "domain": "clinical.spine",
+    "actor_id": "dr_smith_001",
+    "action": "Recommend physiotherapy over fusion for L4-L5 degenerative disc disease in 58yo smoker",
+    "stakes": "moderate"
+  },
+  "clearpath": {
+    "total_traces": 4,
+    "verification_failures": 0,
+    "assumption_ratio": 0.5,
+    "alternatives_considered_avg": 3,
+    "faithfulness_distribution": {
+      "verified_faithful": 3,
+      "narrative": 1,
+      "unverified": 0,
+      "disputed": 0
+    },
+    "availability": {
+      "assumption_ratio": "available",
+      "alternatives_considered_avg": "available"
+    },
+    "provenance": [
+      {
+        "field": "assumption_ratio",
+        "method": "count ASSUME nodes / count ASSUME plus OBSERVE nodes",
+        "inputs": [
+          "cp_001",
+          "cp_002"
+        ],
+        "confidence": 1,
+        "input_fingerprint": "96eac5b2bf543cdc637ad4bf66b07ee9835fe201c76c599570575caad90d950a"
+      },
+      {
+        "field": "alternatives_considered_avg",
+        "method": "average alternatives_considered length across DECIDE nodes",
+        "inputs": [
+          "cp_003"
+        ],
+        "confidence": 1,
+        "input_fingerprint": "96eac5b2bf543cdc637ad4bf66b07ee9835fe201c76c599570575caad90d950a"
+      }
+    ]
+  },
+  "cognitive": {
+    "calibration": null,
+    "bias_count": 2,
+    "growth_trajectory": "stable",
+    "consistency": null,
+    "recurring_biases": [
+      {
+        "bias_type": "intervention_bias",
+        "frequency": 1,
+        "confidence": 0.7
+      },
+      {
+        "bias_type": "availability_bias",
+        "frequency": 1,
+        "confidence": 0.6
+      }
+    ],
+    "availability": {
+      "calibration": "insufficient_history",
+      "consistency": "insufficient_history"
+    },
+    "provenance": [
+      {
+        "field": "bias_count",
+        "method": "count non-null bias annotations",
+        "inputs": [
+          "cl_001",
+          "cl_002",
+          "cl_003"
+        ],
+        "confidence": 0.9,
+        "input_fingerprint": "0f9f43eb79addd938396bfb48ebbc0d9f3c4e4e691dbbd0cce9b2d197389545a"
+      }
+    ]
+  },
+  "consent": {
+    "total_actions": 2,
+    "violations": 1,
+    "violations_by_severity": {
+      "critical": 0,
+      "major": 0,
+      "minor": 1
+    },
+    "scope_creep_detected": true,
+    "scope_creep_pattern_count": 1,
+    "authorisations_active": 1,
+    "authorisations_expired": 0,
+    "source_chain_verified": true,
+    "availability": {
+      "violations": "available",
+      "scope_creep_detected": "available",
+      "source_chain_verified": "available"
+    },
+    "provenance": [
+      {
+        "field": "violations",
+        "method": "sum action records with violation severity",
+        "inputs": [
+          "cnl_002",
+          "cnl_003"
+        ],
+        "confidence": 1,
+        "input_fingerprint": "bab5a4bd48f6c9204ef561cf316817cee08dfe4fe3477f9dd35791e82bbbc044"
+      },
+      {
+        "field": "source_chain_verified",
+        "method": "verifyChain result at adapter call time",
+        "inputs": [
+          "cnl_001",
+          "cnl_002",
+          "cnl_003",
+          "cnl_004"
+        ],
+        "confidence": 1,
+        "input_fingerprint": "bab5a4bd48f6c9204ef561cf316817cee08dfe4fe3477f9dd35791e82bbbc044"
+      }
+    ]
+  },
+  "harm": {
+    "total_incidents": 3,
+    "max_severity": 0.4,
+    "max_severity_label": "moderate",
+    "severity_distribution": {
+      "minor": 1,
+      "moderate": 1,
+      "negligible": 1
+    },
+    "remediation_rate": 0.6666666667,
+    "pending_remediations": 1,
+    "consequence_chain_count": 2,
+    "availability": {
+      "max_severity": "available",
+      "remediation_rate": "available"
+    },
+    "provenance": [
+      {
+        "field": "max_severity",
+        "method": "max severity_score over consequence nodes",
+        "inputs": [
+          "ht_001",
+          "ht_002",
+          "ht_003"
+        ],
+        "confidence": 1,
+        "input_fingerprint": "8184425c8044170d86e926b232b401297775fcdcd45255e6be6d9998d3a3f231"
+      },
+      {
+        "field": "remediation_rate",
+        "method": "remediated consequence nodes / total consequence nodes",
+        "inputs": [
+          "ht_001",
+          "ht_002",
+          "ht_003"
+        ],
+        "confidence": 1,
+        "input_fingerprint": "8184425c8044170d86e926b232b401297775fcdcd45255e6be6d9998d3a3f231"
+      }
+    ]
+  },
+  "assumption": {
+    "total_assumptions": 3,
+    "load_bearing_count": 2,
+    "load_bearing_validated": 1,
+    "validation_ratio": 0.5,
+    "expired_assumptions": 1,
+    "cascade_risks": 1,
+    "pre_action_gate": "caution",
+    "pre_action_reasons": [
+      "Smoking risk assumption not independently verified today"
+    ],
+    "availability": {
+      "validation_ratio": "available",
+      "pre_action_gate": "available"
+    },
+    "provenance": [
+      {
+        "field": "validation_ratio",
+        "method": "load_bearing_validated / load_bearing_count",
+        "inputs": [
+          "arp_001",
+          "arp_002"
+        ],
+        "confidence": 1,
+        "input_fingerprint": "6f4fe0147317a2c46c1f3b75e468fc8d2562abcf77552403c97e6f23a3ece3a4"
+      }
+    ]
+  },
+  "dispute": {
+    "total_disputes": 3,
+    "open_disputes": 1,
+    "resolved_in_favor_of_actor": 1,
+    "resolved_against_actor": 1,
+    "precedents_set": 1,
+    "divergence_summary": {
+      "different_evidence": 1,
+      "different_assumptions": 1,
+      "different_interpretation": 1
+    },
+    "availability": {
+      "total_disputes": "available",
+      "divergence_summary": "available"
+    },
+    "provenance": [
+      {
+        "field": "divergence_summary",
+        "method": "count disputes grouped by divergence category",
+        "inputs": [
+          "dsp_001",
+          "dsp_002",
+          "dsp_003"
+        ],
+        "confidence": 1,
+        "input_fingerprint": "0093c07f89be8fe18ef412b68c1365cff13f6a28f61ed305c2f95ef4aaa5af07"
+      }
+    ]
+  },
+  "ethics": {
+    "total_reviews": 3,
+    "outcome_distribution": {
+      "pass": 1,
+      "flag_minor": 1,
+      "flag_major": 0,
+      "flag_critical": 0,
+      "requires_human_review": 1
+    },
+    "unacknowledged_flags": 1,
+    "vulnerable_population_concerns": 1,
+    "weaponisation_concerns": 0,
+    "availability": {
+      "total_reviews": "available",
+      "outcome_distribution": "available"
+    },
+    "provenance": [
+      {
+        "field": "outcome_distribution",
+        "method": "count reviews grouped by outcome",
+        "inputs": [
+          "egp_001",
+          "egp_002",
+          "egp_003"
+        ],
+        "confidence": 1,
+        "input_fingerprint": "f5400727a28e9571bdf6e0a66112eebd2ae5a68159e3f51e4606a89b99350047"
+      }
+    ]
+  },
+  "trust": {
+    "actor_id": "dr_smith_001",
+    "computed_at": "2026-05-03T12:00:00Z",
+    "overall_score": 0.76,
+    "overall_availability": "available",
+    "dimensions": {
+      "transparency": {
+        "raw_score": 0.88,
+        "score": 0.88,
+        "confidence": 0.72,
+        "evidence_count": 2,
+        "last_updated": "2026-05-03T12:00:00Z",
+        "availability": "available"
+      },
+      "calibration": {
+        "raw_score": null,
+        "score": null,
+        "confidence": 0,
+        "evidence_count": 0,
+        "last_updated": "2026-05-03T12:00:00Z",
+        "availability": "insufficient_history"
+      },
+      "consistency": {
+        "raw_score": null,
+        "score": null,
+        "confidence": 0,
+        "evidence_count": 0,
+        "last_updated": "2026-05-03T12:00:00Z",
+        "availability": "insufficient_history"
+      },
+      "consent_compliance": {
+        "raw_score": 0.82,
+        "score": 0.82,
+        "confidence": 0.72,
+        "evidence_count": 2,
+        "last_updated": "2026-05-03T12:00:00Z",
+        "availability": "available"
+      },
+      "harm_record": {
+        "raw_score": 0.74,
+        "score": 0.74,
+        "confidence": 0.72,
+        "evidence_count": 2,
+        "last_updated": "2026-05-03T12:00:00Z",
+        "availability": "available"
+      },
+      "assumption_discipline": {
+        "raw_score": 0.68,
+        "score": 0.68,
+        "confidence": 0.72,
+        "evidence_count": 2,
+        "last_updated": "2026-05-03T12:00:00Z",
+        "availability": "available"
+      },
+      "dispute_record": {
+        "raw_score": 0.71,
+        "score": 0.71,
+        "confidence": 0.72,
+        "evidence_count": 2,
+        "last_updated": "2026-05-03T12:00:00Z",
+        "availability": "available"
+      },
+      "ethics_record": {
+        "raw_score": 0.79,
+        "score": 0.79,
+        "confidence": 0.72,
+        "evidence_count": 2,
+        "last_updated": "2026-05-03T12:00:00Z",
+        "availability": "available"
+      }
+    },
+    "evidence_sources": [
+      {
+        "source_type": "clearpath_trace",
+        "source_id": "cp_003",
+        "weight": 0.18,
+        "recorded_at": "2026-05-03T12:00:00Z",
+        "reference_record_id": "01HZX1F8Q7M5VK2N9P3R6S8T4Y"
+      },
+      {
+        "source_type": "consent_ledger",
+        "source_id": "cnl_002",
+        "weight": 0.12,
+        "recorded_at": "2026-05-03T12:00:00Z",
+        "reference_record_id": "01HZX1F8Q7M5VK2N9P3R6S8T4Y"
+      },
+      {
+        "source_type": "assumption_registry",
+        "source_id": "arp_002",
+        "weight": 0.1,
+        "recorded_at": "2026-05-03T12:00:00Z",
+        "reference_record_id": "01HZX1F8Q7M5VK2N9P3R6S8T4Y"
+      }
+    ],
+    "decay_applied": false,
+    "provenance": [
+      {
+        "field": "overall_score",
+        "method": "availability-aware mean over available dimensions",
+        "inputs": [
+          "ts_001",
+          "ts_002",
+          "ts_003"
+        ],
+        "confidence": 0.72,
+        "input_fingerprint": "bf9d14a015fdf1dbdd220da51530bc9b4cb5fa91b750ce310ba502b59f5285d1"
+      }
+    ]
+  },
+  "outcome": {
+    "gate_result": "COMMITTED",
+    "gate_reason": "Assumption gate returned caution; consent verified; ethics review had no blocking critical flag; non-surgical recommendation committed.",
+    "acted": true
+  },
+  "previous_hash": null,
+  "content_hash": "152eab926412e397dfdd56217dad03a924bc9c138bee2ceafa2f3200c3d2c705"
+}

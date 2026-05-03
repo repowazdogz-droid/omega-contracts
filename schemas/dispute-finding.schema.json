@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://omegaprotocol.org/schemas/dispute-finding.schema.json",
+  "title": "DisputeFinding",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "total_disputes",
+    "open_disputes",
+    "resolved_in_favor_of_actor",
+    "resolved_against_actor",
+    "precedents_set",
+    "divergence_summary",
+    "availability"
+  ],
+  "properties": {
+    "total_disputes": {
+      "type": "number"
+    },
+    "open_disputes": {
+      "type": "number"
+    },
+    "resolved_in_favor_of_actor": {
+      "type": "number"
+    },
+    "resolved_against_actor": {
+      "type": "number"
+    },
+    "precedents_set": {
+      "type": "number"
+    },
+    "divergence_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "different_evidence",
+        "different_assumptions",
+        "different_interpretation"
+      ],
+      "properties": {
+        "different_evidence": {
+          "type": "number"
+        },
+        "different_assumptions": {
+          "type": "number"
+        },
+        "different_interpretation": {
+          "type": "number"
+        }
+      }
+    },
+    "availability": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "data-availability.schema.json"
+      }
+    },
+    "provenance": {
+      "type": "array",
+      "items": {
+        "$ref": "derived-field-provenance.schema.json"
+      }
+    }
+  }
+}

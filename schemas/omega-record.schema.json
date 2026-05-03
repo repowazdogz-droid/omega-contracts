@@ -1,0 +1,135 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://omegaprotocol.org/schemas/omega-record.schema.json",
+  "title": "OmegaRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_id",
+    "schema_version",
+    "contracts_version",
+    "created_at",
+    "subject",
+    "outcome",
+    "previous_hash",
+    "content_hash"
+  ],
+  "properties": {
+    "record_id": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "omega/1.0"
+    },
+    "contracts_version": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "domain",
+        "action",
+        "actor_id",
+        "stakes"
+      ],
+      "properties": {
+        "domain": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string"
+        },
+        "actor_id": {
+          "type": "string"
+        },
+        "stakes": {
+          "type": "string",
+          "enum": [
+            "low",
+            "moderate",
+            "high",
+            "critical"
+          ]
+        }
+      }
+    },
+    "clearpath": {
+      "$ref": "clearpath-summary.schema.json"
+    },
+    "cognitive": {
+      "$ref": "cognitive-profile.schema.json"
+    },
+    "consent": {
+      "$ref": "consent-record.schema.json"
+    },
+    "harm": {
+      "$ref": "harm-record.schema.json"
+    },
+    "assumption": {
+      "$ref": "assumption-gate.schema.json"
+    },
+    "dispute": {
+      "$ref": "dispute-finding.schema.json"
+    },
+    "ethics": {
+      "$ref": "ethics-review.schema.json"
+    },
+    "trust": {
+      "$ref": "trust-score.schema.json"
+    },
+    "outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gate_result",
+        "gate_reason",
+        "acted"
+      ],
+      "properties": {
+        "gate_result": {
+          "type": "string",
+          "enum": [
+            "COMMITTED",
+            "HELD",
+            "ESCALATED"
+          ]
+        },
+        "gate_reason": {
+          "type": "string"
+        },
+        "acted": {
+          "type": "boolean"
+        },
+        "non_action_record": {
+          "type": "string"
+        },
+        "blocked_by": {
+          "$ref": "protocol-id.schema.json"
+        }
+      }
+    },
+    "provenance": {
+      "type": "array",
+      "items": {
+        "$ref": "derived-field-provenance.schema.json"
+      }
+    },
+    "previous_hash": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "content_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "signature": {
+      "type": "string"
+    }
+  }
+}

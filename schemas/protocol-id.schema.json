@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://omegaprotocol.org/schemas/protocol-id.schema.json",
+  "title": "ProtocolId",
+  "type": "string",
+  "enum": [
+    "clearpath",
+    "cognitive-ledger",
+    "consent-ledger",
+    "harm-trace",
+    "assumption-registry",
+    "dispute-protocol",
+    "ethics-gate",
+    "trust-score",
+    "omega-record"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "total_disputes": 3,
+  "open_disputes": 1,
+  "resolved_in_favor_of_actor": 1,
+  "resolved_against_actor": 1,
+  "precedents_set": 1,
+  "divergence_summary": {
+    "different_evidence": 1,
+    "different_assumptions": 1,
+    "different_interpretation": 1
+  },
+  "availability": {
+    "total_disputes": "available",
+    "divergence_summary": "available"
+  },
+  "provenance": [
+    {
+      "field": "divergence_summary",
+      "method": "count disputes grouped by divergence category",
+      "inputs": [
+        "dsp_001",
+        "dsp_002",
+        "dsp_003"
+      ],
+      "confidence": 1,
+      "input_fingerprint": "0093c07f89be8fe18ef412b68c1365cff13f6a28f61ed305c2f95ef4aaa5af07"
+    }
+  ]
+}

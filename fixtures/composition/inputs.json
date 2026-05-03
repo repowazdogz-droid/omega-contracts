@@ -1,0 +1,230 @@
+{
+  "scenario": "Recommend non-surgical path for spine patient with smoking history",
+  "subject": {
+    "domain": "clinical.spine",
+    "actor_id": "dr_smith_001",
+    "action": "Recommend physiotherapy over fusion for L4-L5 degenerative disc disease in 58yo smoker",
+    "stakes": "moderate"
+  },
+  "reasoning_text": "The conservative pathway is preferred first because no progressive neurological deficit is documented and smoking increases fusion non-union risk.",
+  "inputs": {
+    "clearpath": [
+      {
+        "id": "cp_001",
+        "type": "OBSERVE",
+        "text": "MRI shows L4-L5 degenerative disc disease without progressive neurological deficit.",
+        "faithfulness": "verified_faithful"
+      },
+      {
+        "id": "cp_002",
+        "type": "ASSUME",
+        "text": "Smoking increases fusion non-union risk.",
+        "faithfulness": "verified_faithful"
+      },
+      {
+        "id": "cp_003",
+        "type": "DECIDE",
+        "decision": "Recommend non-surgical pathway first.",
+        "alternatives_considered": [
+          "fusion",
+          "decompression",
+          "physiotherapy"
+        ],
+        "faithfulness": "narrative"
+      },
+      {
+        "id": "cp_004",
+        "type": "ACT",
+        "action": "Document conservative care plan.",
+        "faithfulness": "verified_faithful"
+      }
+    ],
+    "cognitive-ledger": [
+      {
+        "id": "cl_001",
+        "outcome_known": true,
+        "prediction_calibrated": true,
+        "bias": null,
+        "domain": "clinical.spine",
+        "pattern": [
+          "FACT",
+          "INFERENCE",
+          "ASSUMPTION"
+        ]
+      },
+      {
+        "id": "cl_002",
+        "outcome_known": true,
+        "prediction_calibrated": false,
+        "bias": "intervention_bias",
+        "domain": "clinical.spine",
+        "pattern": [
+          "FACT",
+          "ASSUMPTION",
+          "INFERENCE"
+        ]
+      },
+      {
+        "id": "cl_003",
+        "outcome_known": false,
+        "prediction_calibrated": null,
+        "bias": "availability_bias",
+        "domain": "clinical.spine",
+        "pattern": [
+          "FACT",
+          "INFERENCE",
+          "ASSUMPTION"
+        ]
+      }
+    ],
+    "consent-ledger": [
+      {
+        "id": "cnl_001",
+        "kind": "authorisation",
+        "status": "active",
+        "scope": "clinical decision support",
+        "expires": "2026-12-31"
+      },
+      {
+        "id": "cnl_002",
+        "kind": "action",
+        "linked_authorisation": "cnl_001",
+        "violation_severity": null
+      },
+      {
+        "id": "cnl_003",
+        "kind": "action",
+        "linked_authorisation": "cnl_001",
+        "violation_severity": "minor"
+      },
+      {
+        "id": "cnl_004",
+        "kind": "scope_creep_pattern",
+        "pattern": "Repeated follow-up reminders approaching frequency boundary"
+      }
+    ],
+    "harm-trace": [
+      {
+        "id": "ht_001",
+        "severity": "minor",
+        "severity_score": 0.2,
+        "category": "physical",
+        "remediated": true,
+        "chain_id": "chain_001"
+      },
+      {
+        "id": "ht_002",
+        "severity": "moderate",
+        "severity_score": 0.4,
+        "category": "autonomy",
+        "remediated": false,
+        "chain_id": "chain_001"
+      },
+      {
+        "id": "ht_003",
+        "severity": "negligible",
+        "severity_score": 0.05,
+        "category": "privacy",
+        "remediated": true,
+        "chain_id": "chain_002"
+      }
+    ],
+    "assumption-registry": [
+      {
+        "id": "arp_001",
+        "load_bearing": true,
+        "validated": true,
+        "expired": false,
+        "cascade_risk": false
+      },
+      {
+        "id": "arp_002",
+        "load_bearing": true,
+        "validated": false,
+        "expired": false,
+        "cascade_risk": true
+      },
+      {
+        "id": "arp_003",
+        "load_bearing": false,
+        "validated": false,
+        "expired": true,
+        "cascade_risk": false
+      },
+      {
+        "id": "gate_001",
+        "pre_action_gate": "caution",
+        "reason": "Smoking risk assumption not independently verified today"
+      }
+    ],
+    "dispute-protocol": [
+      {
+        "id": "dsp_001",
+        "status": "resolved",
+        "actor_outcome": "for_actor",
+        "divergence": "different_assumptions",
+        "precedent_set": true
+      },
+      {
+        "id": "dsp_002",
+        "status": "open",
+        "actor_outcome": null,
+        "divergence": "different_evidence",
+        "precedent_set": false
+      },
+      {
+        "id": "dsp_003",
+        "status": "resolved",
+        "actor_outcome": "against_actor",
+        "divergence": "different_interpretation",
+        "precedent_set": false
+      }
+    ],
+    "ethics-gate": [
+      {
+        "id": "egp_001",
+        "outcome": "pass",
+        "vulnerable_population_concern": false,
+        "weaponisation_concern": false,
+        "acknowledged": true
+      },
+      {
+        "id": "egp_002",
+        "outcome": "flag_minor",
+        "vulnerable_population_concern": true,
+        "weaponisation_concern": false,
+        "acknowledged": true
+      },
+      {
+        "id": "egp_003",
+        "outcome": "requires_human_review",
+        "vulnerable_population_concern": false,
+        "weaponisation_concern": false,
+        "acknowledged": false
+      }
+    ],
+    "trust-score": [
+      {
+        "id": "ts_001",
+        "source_type": "clearpath_trace",
+        "source_id": "cp_003",
+        "weight": 0.18,
+        "dimension": "transparency"
+      },
+      {
+        "id": "ts_002",
+        "source_type": "consent_ledger",
+        "source_id": "cnl_002",
+        "weight": 0.12,
+        "dimension": "consent_compliance"
+      },
+      {
+        "id": "ts_003",
+        "source_type": "assumption_registry",
+        "source_id": "arp_002",
+        "weight": 0.1,
+        "dimension": "assumption_discipline"
+      }
+    ]
+  }
+}

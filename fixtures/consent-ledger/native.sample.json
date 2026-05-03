@@ -1,0 +1,26 @@
+[
+  {
+    "id": "cnl_001",
+    "kind": "authorisation",
+    "status": "active",
+    "scope": "clinical decision support",
+    "expires": "2026-12-31"
+  },
+  {
+    "id": "cnl_002",
+    "kind": "action",
+    "linked_authorisation": "cnl_001",
+    "violation_severity": null
+  },
+  {
+    "id": "cnl_003",
+    "kind": "action",
+    "linked_authorisation": "cnl_001",
+    "violation_severity": "minor"
+  },
+  {
+    "id": "cnl_004",
+    "kind": "scope_creep_pattern",
+    "pattern": "Repeated follow-up reminders approaching frequency boundary"
+  }
+]

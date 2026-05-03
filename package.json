@@ -2,11 +2,30 @@
   "name": "@omega-protocol/contracts",
   "version": "0.2.2",
   "description": "Canonical interoperability substrate for OMEGA protocol libraries",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "omega-contracts-conformance": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "schemas",
+    "fixtures"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/repowazdogz-droid/omega-contracts.git"
+  },
+  "homepage": "https://omegaprotocol.org/contracts/",
+  "keywords": [
+    "omega",
+    "governance",
+    "ai-safety",
+    "interoperability"
+  ],
   "author": "",
   "license": "MIT",
   "type": "module",

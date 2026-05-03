@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://omegaprotocol.org/schemas/assumption-gate.schema.json",
+  "title": "AssumptionGate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "total_assumptions",
+    "load_bearing_count",
+    "load_bearing_validated",
+    "validation_ratio",
+    "expired_assumptions",
+    "cascade_risks",
+    "pre_action_gate",
+    "pre_action_reasons",
+    "availability"
+  ],
+  "properties": {
+    "total_assumptions": {
+      "type": "number"
+    },
+    "load_bearing_count": {
+      "type": "number"
+    },
+    "load_bearing_validated": {
+      "type": "number"
+    },
+    "validation_ratio": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "expired_assumptions": {
+      "type": "number"
+    },
+    "cascade_risks": {
+      "type": "number"
+    },
+    "pre_action_gate": {
+      "type": "string",
+      "enum": [
+        "pass",
+        "caution",
+        "block"
+      ]
+    },
+    "pre_action_reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "availability": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "data-availability.schema.json"
+      }
+    },
+    "provenance": {
+      "type": "array",
+      "items": {
+        "$ref": "derived-field-provenance.schema.json"
+      }
+    }
+  }
+}

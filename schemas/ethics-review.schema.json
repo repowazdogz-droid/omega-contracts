@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://omegaprotocol.org/schemas/ethics-review.schema.json",
+  "title": "EthicsReview",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "total_reviews",
+    "outcome_distribution",
+    "unacknowledged_flags",
+    "vulnerable_population_concerns",
+    "weaponisation_concerns",
+    "availability"
+  ],
+  "properties": {
+    "total_reviews": {
+      "type": "number"
+    },
+    "outcome_distribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pass",
+        "flag_minor",
+        "flag_major",
+        "flag_critical",
+        "requires_human_review"
+      ],
+      "properties": {
+        "pass": {
+          "type": "number"
+        },
+        "flag_minor": {
+          "type": "number"
+        },
+        "flag_major": {
+          "type": "number"
+        },
+        "flag_critical": {
+          "type": "number"
+        },
+        "requires_human_review": {
+          "type": "number"
+        }
+      }
+    },
+    "unacknowledged_flags": {
+      "type": "number"
+    },
+    "vulnerable_population_concerns": {
+      "type": "number"
+    },
+    "weaponisation_concerns": {
+      "type": "number"
+    },
+    "availability": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "data-availability.schema.json"
+      }
+    },
+    "provenance": {
+      "type": "array",
+      "items": {
+        "$ref": "derived-field-provenance.schema.json"
+      }
+    }
+  }
+}

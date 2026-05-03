@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://omegaprotocol.org/schemas/trust-evidence.schema.json",
+  "title": "TrustEvidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "source_type",
+    "source_id",
+    "weight",
+    "recorded_at"
+  ],
+  "properties": {
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "clearpath_trace",
+        "cognitive_ledger",
+        "consent_ledger",
+        "harm_trace",
+        "assumption_registry",
+        "dispute_record",
+        "ethics_review",
+        "external_attestation"
+      ]
+    },
+    "source_id": {
+      "type": "string"
+    },
+    "weight": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "recorded_at": {
+      "type": "string"
+    },
+    "reference_record_id": {
+      "type": "string"
+    }
+  }
+}

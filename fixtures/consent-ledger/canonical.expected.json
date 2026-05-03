@@ -1,0 +1,43 @@
+{
+  "total_actions": 2,
+  "violations": 1,
+  "violations_by_severity": {
+    "critical": 0,
+    "major": 0,
+    "minor": 1
+  },
+  "scope_creep_detected": true,
+  "scope_creep_pattern_count": 1,
+  "authorisations_active": 1,
+  "authorisations_expired": 0,
+  "source_chain_verified": true,
+  "availability": {
+    "violations": "available",
+    "scope_creep_detected": "available",
+    "source_chain_verified": "available"
+  },
+  "provenance": [
+    {
+      "field": "violations",
+      "method": "sum action records with violation severity",
+      "inputs": [
+        "cnl_002",
+        "cnl_003"
+      ],
+      "confidence": 1,
+      "input_fingerprint": "bab5a4bd48f6c9204ef561cf316817cee08dfe4fe3477f9dd35791e82bbbc044"
+    },
+    {
+      "field": "source_chain_verified",
+      "method": "verifyChain result at adapter call time",
+      "inputs": [
+        "cnl_001",
+        "cnl_002",
+        "cnl_003",
+        "cnl_004"
+      ],
+      "confidence": 1,
+      "input_fingerprint": "bab5a4bd48f6c9204ef561cf316817cee08dfe4fe3477f9dd35791e82bbbc044"
+    }
+  ]
+}

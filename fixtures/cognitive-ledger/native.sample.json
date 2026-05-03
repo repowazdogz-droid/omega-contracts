@@ -1,0 +1,38 @@
+[
+  {
+    "id": "cl_001",
+    "outcome_known": true,
+    "prediction_calibrated": true,
+    "bias": null,
+    "domain": "clinical.spine",
+    "pattern": [
+      "FACT",
+      "INFERENCE",
+      "ASSUMPTION"
+    ]
+  },
+  {
+    "id": "cl_002",
+    "outcome_known": true,
+    "prediction_calibrated": false,
+    "bias": "intervention_bias",
+    "domain": "clinical.spine",
+    "pattern": [
+      "FACT",
+      "ASSUMPTION",
+      "INFERENCE"
+    ]
+  },
+  {
+    "id": "cl_003",
+    "outcome_known": false,
+    "prediction_calibrated": null,
+    "bias": "availability_bias",
+    "domain": "clinical.spine",
+    "pattern": [
+      "FACT",
+      "INFERENCE",
+      "ASSUMPTION"
+    ]
+  }
+]

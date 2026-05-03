@@ -1,0 +1,23 @@
+[
+  {
+    "id": "egp_001",
+    "outcome": "pass",
+    "vulnerable_population_concern": false,
+    "weaponisation_concern": false,
+    "acknowledged": true
+  },
+  {
+    "id": "egp_002",
+    "outcome": "flag_minor",
+    "vulnerable_population_concern": true,
+    "weaponisation_concern": false,
+    "acknowledged": true
+  },
+  {
+    "id": "egp_003",
+    "outcome": "requires_human_review",
+    "vulnerable_population_concern": false,
+    "weaponisation_concern": false,
+    "acknowledged": false
+  }
+]

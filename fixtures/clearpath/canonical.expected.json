@@ -1,0 +1,37 @@
+{
+  "total_traces": 4,
+  "verification_failures": 0,
+  "assumption_ratio": 0.5,
+  "alternatives_considered_avg": 3,
+  "faithfulness_distribution": {
+    "verified_faithful": 3,
+    "narrative": 1,
+    "unverified": 0,
+    "disputed": 0
+  },
+  "availability": {
+    "assumption_ratio": "available",
+    "alternatives_considered_avg": "available"
+  },
+  "provenance": [
+    {
+      "field": "assumption_ratio",
+      "method": "count ASSUME nodes / count ASSUME plus OBSERVE nodes",
+      "inputs": [
+        "cp_001",
+        "cp_002"
+      ],
+      "confidence": 1,
+      "input_fingerprint": "96eac5b2bf543cdc637ad4bf66b07ee9835fe201c76c599570575caad90d950a"
+    },
+    {
+      "field": "alternatives_considered_avg",
+      "method": "average alternatives_considered length across DECIDE nodes",
+      "inputs": [
+        "cp_003"
+      ],
+      "confidence": 1,
+      "input_fingerprint": "96eac5b2bf543cdc637ad4bf66b07ee9835fe201c76c599570575caad90d950a"
+    }
+  ]
+}

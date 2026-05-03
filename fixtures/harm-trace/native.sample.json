@@ -1,0 +1,26 @@
+[
+  {
+    "id": "ht_001",
+    "severity": "minor",
+    "severity_score": 0.2,
+    "category": "physical",
+    "remediated": true,
+    "chain_id": "chain_001"
+  },
+  {
+    "id": "ht_002",
+    "severity": "moderate",
+    "severity_score": 0.4,
+    "category": "autonomy",
+    "remediated": false,
+    "chain_id": "chain_001"
+  },
+  {
+    "id": "ht_003",
+    "severity": "negligible",
+    "severity_score": 0.05,
+    "category": "privacy",
+    "remediated": true,
+    "chain_id": "chain_002"
+  }
+]

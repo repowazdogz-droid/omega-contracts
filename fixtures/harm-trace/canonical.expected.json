@@ -1,0 +1,41 @@
+{
+  "total_incidents": 3,
+  "max_severity": 0.4,
+  "max_severity_label": "moderate",
+  "severity_distribution": {
+    "minor": 1,
+    "moderate": 1,
+    "negligible": 1
+  },
+  "remediation_rate": 0.6666666667,
+  "pending_remediations": 1,
+  "consequence_chain_count": 2,
+  "availability": {
+    "max_severity": "available",
+    "remediation_rate": "available"
+  },
+  "provenance": [
+    {
+      "field": "max_severity",
+      "method": "max severity_score over consequence nodes",
+      "inputs": [
+        "ht_001",
+        "ht_002",
+        "ht_003"
+      ],
+      "confidence": 1,
+      "input_fingerprint": "8184425c8044170d86e926b232b401297775fcdcd45255e6be6d9998d3a3f231"
+    },
+    {
+      "field": "remediation_rate",
+      "method": "remediated consequence nodes / total consequence nodes",
+      "inputs": [
+        "ht_001",
+        "ht_002",
+        "ht_003"
+      ],
+      "confidence": 1,
+      "input_fingerprint": "8184425c8044170d86e926b232b401297775fcdcd45255e6be6d9998d3a3f231"
+    }
+  ]
+}
