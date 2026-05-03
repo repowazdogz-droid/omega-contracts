@@ -1,0 +1,24 @@
+{
+  "name": "@omega-protocol/contracts",
+  "version": "0.2.2",
+  "description": "Canonical interoperability substrate for OMEGA protocol libraries",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "ajv": "^8.20.0",
+    "canonicalize": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "json-schema-to-typescript": "^15.0.4",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.5"
+  }
+}
