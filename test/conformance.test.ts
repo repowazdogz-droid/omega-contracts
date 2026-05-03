@@ -17,7 +17,7 @@ describe('conformance runner', () => {
           passed: true,
         }),
         expect.objectContaining({
-          name: 'self-test no adapter timestamps in canonical fixtures',
+          name: 'self-test no adapter timestamps in canonical provenance',
           passed: true,
         }),
       ]),

@@ -78,25 +78,24 @@ const SCHEMA_NAMES = [
   'omega-record.schema.json',
 ];
 
-function repoRoot(): string {
-  return resolve(dirname(new URL(import.meta.url).pathname), '..');
-}
-
 function readJson<T = unknown>(path: string): T {
   return JSON.parse(readFileSync(path, 'utf8')) as T;
 }
 
-function contractsRoot(): string {
-  const sourceRoot = repoRoot();
-  if (existsSync(join(sourceRoot, 'schemas'))) {
-    return sourceRoot;
+function packageRoot(): string {
+  let dir = dirname(new URL(import.meta.url).pathname);
+  while (dir !== '/' && !existsSync(join(dir, 'package.json'))) {
+    dir = dirname(dir);
   }
-  return resolve(sourceRoot, '..');
+  if (dir === '/') {
+    throw new Error('Could not locate package.json — running outside package?');
+  }
+  return dir;
 }
 
 function createAjv() {
   const ajv = new AjvConstructor({ allErrors: true, strict: false });
-  const root = contractsRoot();
+  const root = packageRoot();
   for (const schemaName of SCHEMA_NAMES) {
     ajv.addSchema(readJson(join(root, 'schemas', schemaName)));
   }
@@ -194,7 +193,7 @@ async function runStandardConformance(libraryPath: string, level: ConformanceLev
     return finalResult(libraryPath, level, checks);
   }
 
-  const fixtureDir = join(contractsRoot(), 'fixtures', adapter.protocolId);
+  const fixtureDir = join(packageRoot(), 'fixtures', adapter.protocolId);
   const nativePath = join(fixtureDir, 'native.sample.json');
   const expectedPath = join(fixtureDir, 'canonical.expected.json');
   if (!existsSync(nativePath) || !existsSync(expectedPath)) {
@@ -226,7 +225,7 @@ async function runStandardConformance(libraryPath: string, level: ConformanceLev
     return finalResult(libraryPath, level, checks);
   }
 
-  const compositionRecord = readJson<Record<string, unknown>>(join(contractsRoot(), 'fixtures', 'composition', 'expected_record.json'));
+  const compositionRecord = readJson<Record<string, unknown>>(join(packageRoot(), 'fixtures', 'composition', 'expected_record.json'));
   const fieldName = FIXTURE_TO_RECORD_FIELD[adapter.protocolId];
   if (!fieldName) {
     checks.push(check('C2 synthesized OmegaRecord validates', false, `no OmegaRecord field mapping for ${adapter.protocolId}`));
@@ -241,8 +240,18 @@ async function runStandardConformance(libraryPath: string, level: ConformanceLev
     return finalResult(libraryPath, level, checks);
   }
 
-  const noTimestamp = !/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(JSON.stringify(canonical));
-  checks.push(check('C3 no timestamp in adapter output', noTimestamp));
+  const provenanceJson =
+    typeof canonical === 'object' && canonical !== null
+      ? JSON.stringify((canonical as { provenance?: unknown[] }).provenance ?? [])
+      : '[]';
+  const hasTimestampInProvenance = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(provenanceJson);
+  checks.push(
+    check(
+      'C3 no timestamp in adapter provenance',
+      !hasTimestampInProvenance,
+      hasTimestampInProvenance ? 'provenance contains a timestamp; use input_fingerprint instead' : undefined,
+    ),
+  );
   checks.push(check('C3 derived nullable provenance', hasNullableFieldProvenance(adapter.canonicalShape, canonical)));
   checks.push(hashReproducibilityCheck());
 
@@ -271,7 +280,7 @@ function hasNullableFieldProvenance(shape: string, canonical: unknown): boolean 
 }
 
 function hashReproducibilityCheck(): Check {
-  const root = contractsRoot();
+  const root = packageRoot();
   const record = readJson<Record<string, unknown>>(join(root, 'fixtures', 'composition', 'expected_record.json'));
   const expected = readFileSync(join(root, 'fixtures', 'composition', 'expected_content_hash.txt'), 'utf8').trim();
   const actual = computeContentHash(record);
@@ -280,7 +289,7 @@ function hashReproducibilityCheck(): Check {
 
 async function runSelfTest(libraryPath: string, level: ConformanceLevel): Promise<ConformanceResult> {
   const checks: Check[] = [];
-  const root = contractsRoot();
+  const root = packageRoot();
   const ajv = createAjv();
   const expectedRecord = readJson<Record<string, unknown>>(join(root, 'fixtures', 'composition', 'expected_record.json'));
   const expectedHash = readFileSync(join(root, 'fixtures', 'composition', 'expected_content_hash.txt'), 'utf8').trim();
@@ -292,17 +301,17 @@ async function runSelfTest(libraryPath: string, level: ConformanceLevel): Promis
   checks.push(check('self-test content_hash reproducibility', actualHash === expectedHash && expectedRecord.content_hash === expectedHash, `actual=${actualHash} expected=${expectedHash}`));
 
   if (level === 'C3') {
-    const protocolDirs = Object.keys(FIXTURE_TO_RECORD_FIELD).filter((protocol) => protocol !== 'trust-score');
+    const protocolDirs = Object.keys(FIXTURE_TO_RECORD_FIELD);
     const timestampPattern = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/;
     const timestampHits = protocolDirs.filter((protocol) => {
-      const canonical = readFileSync(join(root, 'fixtures', protocol, 'canonical.expected.json'), 'utf8');
-      return timestampPattern.test(canonical);
+      const canonical = readJson<{ provenance?: unknown[] }>(join(root, 'fixtures', protocol, 'canonical.expected.json'));
+      return timestampPattern.test(JSON.stringify(canonical.provenance ?? []));
     });
     checks.push(
       check(
-        'self-test no adapter timestamps in canonical fixtures',
+        'self-test no adapter timestamps in canonical provenance',
         timestampHits.length === 0,
-        'trust-score fixture excluded because TrustScore has required orchestration timestamps',
+        timestampHits.length === 0 ? undefined : `provenance timestamps found in: ${timestampHits.join(', ')}`,
       ),
     );
   }

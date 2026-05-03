@@ -2,10 +2,20 @@
   "name": "@omega-protocol/contracts",
   "version": "0.2.2",
   "description": "Canonical interoperability substrate for OMEGA protocol libraries",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./schemas/*": "./schemas/*",
+    "./fixtures/*": "./fixtures/*",
+    "./package.json": "./package.json"
+  },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "omega-contracts-conformance": "./dist/cli.js"
+    "omega-contracts-conformance": "./dist/cli.js",
+    "omega-contracts": "./dist/cli.js"
   },
   "files": [
     "dist",
@@ -13,7 +23,10 @@
     "fixtures"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "test": "vitest run",
+    "check": "tsc --noEmit",
+    "conformance": "tsx src/cli.ts"
   },
   "repository": {
     "type": "git",
@@ -37,7 +50,7 @@
     "@types/node": "^25.6.0",
     "json-schema-to-typescript": "^15.0.4",
     "tsx": "^4.21.0",
-    "typescript": "^6.0.3",
+    "typescript": "^5.9.3",
     "vitest": "^4.1.5"
   }
 }
