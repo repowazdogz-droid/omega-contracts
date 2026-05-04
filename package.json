@@ -14,8 +14,8 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "omega-contracts-conformance": "./dist/cli.js",
-    "omega-contracts": "./dist/cli.js"
+    "omega-contracts-conformance": "dist/cli.js",
+    "omega-contracts": "dist/cli.js"
   },
   "files": [
     "dist",
@@ -23,14 +23,14 @@
     "fixtures"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && node scripts/postbuild.mjs",
     "test": "vitest run",
     "check": "tsc --noEmit",
     "conformance": "tsx src/cli.ts"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/repowazdogz-droid/omega-contracts.git"
+    "url": "git+https://github.com/repowazdogz-droid/omega-contracts.git"
   },
   "homepage": "https://omegaprotocol.org/contracts/",
   "keywords": [
