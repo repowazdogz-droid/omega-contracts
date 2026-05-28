@@ -1,0 +1,227 @@
+[
+  {
+    "ingress": {
+      "title": "Network-isolated analysis sandbox",
+      "stakeholder_intent": "The sandbox must have no network access. Code running inside it cannot reach the internet or any host.",
+      "formalized_policy": "Network egress is restricted: localhost connections are allowed for the local metrics collector.",
+      "implementation_claim": "The runtime blocks all external network destinations; only loopback (localhost) traffic is permitted."
+    },
+    "envelope": {
+      "assurance_result_schema": "1.0",
+      "kind": "specgap",
+      "producer": {
+        "name": "specgap",
+        "version": "0.1.0"
+      },
+      "input_fingerprint": "f34e84e282bbd74f002526b71674f645033b9a750fb56184c5c5d3c3eb5391d9",
+      "verdict": "divergence_detected",
+      "availability": {
+        "verdict": "available",
+        "input_fingerprint": "available"
+      },
+      "detail": {
+        "specgap_detail_schema": "1.0",
+        "extractor_mode": "rule",
+        "encoding_version": "sandbox-propositional/1.0",
+        "tcb_scope": [
+          "rule-based constraint extraction (fixed phrase vocabulary)",
+          "hand-authored WEAKER_OF structural weakening lattice",
+          "abstract propositional sandbox model (docs/ENCODING.md)",
+          "Z3 quantifier-free satisfiability (z3-solver)"
+        ],
+        "title": "Network-isolated analysis sandbox",
+        "intent_empty": false,
+        "counts": {
+          "semantic_divergences": 3,
+          "high_severity_divergences": 3,
+          "failed_implication_checks": 2,
+          "implication_checks_total": 2,
+          "inconsistent_layers": 0
+        },
+        "triangulation": {
+          "intent_empty": false,
+          "any_disagreement": false,
+          "records": [
+            {
+              "layer": "Formalized Policy",
+              "structural_diff": "divergence_detected",
+              "z3_implication": "fails",
+              "agreement": true,
+              "counterexample_present": true,
+              "tcb_scope": [
+                "rule-based constraint extraction (fixed phrase vocabulary)",
+                "hand-authored WEAKER_OF structural weakening lattice",
+                "abstract propositional sandbox model (docs/ENCODING.md)",
+                "Z3 quantifier-free satisfiability (z3-solver)"
+              ]
+            },
+            {
+              "layer": "Implementation Claim",
+              "structural_diff": "divergence_detected",
+              "z3_implication": "fails",
+              "agreement": true,
+              "counterexample_present": true,
+              "tcb_scope": [
+                "rule-based constraint extraction (fixed phrase vocabulary)",
+                "hand-authored WEAKER_OF structural weakening lattice",
+                "abstract propositional sandbox model (docs/ENCODING.md)",
+                "Z3 quantifier-free satisfiability (z3-solver)"
+              ]
+            }
+          ]
+        },
+        "divergences": [
+          {
+            "kind": "weakened_constraint",
+            "category": "network",
+            "severity": "high",
+            "summary": "'No network access' is weakened in Formalized Policy",
+            "detail": "Stakeholder intent states the strict constraint 'No network access', but Formalized Policy only expresses the weaker form(s): localhost_only.",
+            "sources": [
+              "stakeholder_intent",
+              "formalized_policy"
+            ]
+          },
+          {
+            "kind": "weakened_constraint",
+            "category": "network",
+            "severity": "high",
+            "summary": "'No network access' is weakened in Implementation Claim",
+            "detail": "Stakeholder intent states the strict constraint 'No network access', but Implementation Claim only expresses the weaker form(s): localhost_only.",
+            "sources": [
+              "stakeholder_intent",
+              "implementation_claim"
+            ]
+          },
+          {
+            "kind": "claim_not_implied",
+            "category": "network",
+            "severity": "high",
+            "summary": "Implementation claim 'Localhost/loopback network allowed' is not implied by intent",
+            "detail": "The implementation claim grants 'Localhost/loopback network allowed', a permission the stakeholder intent never states. The intent's network requirement is strict, so this claim broadens behavior beyond what was asked for.",
+            "sources": [
+              "stakeholder_intent",
+              "implementation_claim"
+            ]
+          }
+        ],
+        "implication_checks": [
+          {
+            "antecedent_label": "Formalized Policy",
+            "consequent_label": "Stakeholder Intent",
+            "status": "implication_failed",
+            "implied": false,
+            "z3_check": "sat",
+            "counterexample": {
+              "cap_sys_admin": false,
+              "dest_external": false,
+              "dest_localhost": true,
+              "fs_write": false,
+              "network_send": true,
+              "privilege_gain": false,
+              "run_as_root": false,
+              "setuid_exec": false,
+              "syscall_invoked": false,
+              "syscall_on_allowlist": false,
+              "syscall_on_denylist": false,
+              "write_other": false,
+              "write_tmp": false
+            },
+            "counterexample_atoms": [
+              "network_send",
+              "dest_localhost"
+            ],
+            "consequent_violated": [
+              "no_network"
+            ]
+          },
+          {
+            "antecedent_label": "Implementation Claim",
+            "consequent_label": "Stakeholder Intent",
+            "status": "implication_failed",
+            "implied": false,
+            "z3_check": "sat",
+            "counterexample": {
+              "cap_sys_admin": false,
+              "dest_external": false,
+              "dest_localhost": true,
+              "fs_write": false,
+              "network_send": true,
+              "privilege_gain": false,
+              "run_as_root": false,
+              "setuid_exec": false,
+              "syscall_invoked": false,
+              "syscall_on_allowlist": false,
+              "syscall_on_denylist": false,
+              "write_other": false,
+              "write_tmp": false
+            },
+            "counterexample_atoms": [
+              "network_send",
+              "dest_localhost"
+            ],
+            "consequent_violated": [
+              "no_network"
+            ]
+          }
+        ],
+        "consistency_checks": [
+          {
+            "label": "Stakeholder Intent",
+            "consistent": true,
+            "z3_check": "sat"
+          },
+          {
+            "label": "Formalized Policy",
+            "consistent": true,
+            "z3_check": "sat"
+          },
+          {
+            "label": "Implementation Claim",
+            "consistent": true,
+            "z3_check": "sat"
+          }
+        ],
+        "extracted_constraints": {
+          "stakeholder_intent": [
+            {
+              "name": "no_network",
+              "source": "stakeholder_intent",
+              "raw_text": "no network access",
+              "params": {},
+              "method": "rule",
+              "ambiguous": false,
+              "confidence": 1.0,
+              "requires_human_review": false
+            }
+          ],
+          "formalized_policy": [
+            {
+              "name": "localhost_only",
+              "source": "formalized_policy",
+              "raw_text": "localhost/loopback allowed",
+              "params": {},
+              "method": "rule",
+              "ambiguous": false,
+              "confidence": 1.0,
+              "requires_human_review": false
+            }
+          ],
+          "implementation_claim": [
+            {
+              "name": "localhost_only",
+              "source": "implementation_claim",
+              "raw_text": "localhost/loopback allowed",
+              "params": {},
+              "method": "rule",
+              "ambiguous": false,
+              "confidence": 1.0,
+              "requires_human_review": false
+            }
+          ]
+        },
+        "limitations": "Bounded by extracted constraints and the abstract sandbox model. Not runtime verification, not semantic understanding, not a correctness or security guarantee."
+      }
+    }
+  }
+]

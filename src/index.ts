@@ -1,4 +1,5 @@
 export * from './adapter.js';
+export * from './assurance.js';
 export * from './assumption.js';
 export * from './clearpath.js';
 export * from './cognitive.js';

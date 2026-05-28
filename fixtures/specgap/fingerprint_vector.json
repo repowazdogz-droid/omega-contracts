@@ -1,0 +1,10 @@
+{
+  "description": "Cross-language RFC 8785 JCS fingerprint anchor for SpecGap spec ingress.",
+  "ingress": {
+    "title": "Network-isolated analysis sandbox",
+    "stakeholder_intent": "The sandbox must have no network access. Code running inside it cannot reach the internet or any host.",
+    "formalized_policy": "Network egress is restricted: localhost connections are allowed for the local metrics collector.",
+    "implementation_claim": "The runtime blocks all external network destinations; only loopback (localhost) traffic is permitted."
+  },
+  "input_fingerprint": "f34e84e282bbd74f002526b71674f645033b9a750fb56184c5c5d3c3eb5391d9"
+}

@@ -12,6 +12,7 @@
     "dispute-protocol",
     "ethics-gate",
     "trust-score",
+    "specgap",
     "omega-record"
   ]
 }

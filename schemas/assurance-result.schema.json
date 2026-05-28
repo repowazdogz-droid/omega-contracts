@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://omegaprotocol.org/schemas/assurance-result.schema.json",
+  "title": "AssuranceResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "kind",
+    "producer_name",
+    "producer_version",
+    "input_fingerprint",
+    "verdict",
+    "availability",
+    "specgap"
+  ],
+  "properties": {
+    "kind": {
+      "const": "specgap"
+    },
+    "producer_name": {
+      "type": "string",
+      "const": "specgap"
+    },
+    "producer_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "input_fingerprint": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "verdict": {
+      "type": "string",
+      "enum": [
+        "extraction_failure",
+        "divergence_detected",
+        "no_divergence_detected"
+      ]
+    },
+    "availability": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "data-availability.schema.json"
+      }
+    },
+    "specgap": {
+      "$ref": "specgap-assurance-summary.schema.json"
+    },
+    "provenance": {
+      "type": "array",
+      "items": {
+        "$ref": "derived-field-provenance.schema.json"
+      }
+    }
+  }
+}

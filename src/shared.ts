@@ -7,6 +7,7 @@ export type ProtocolId =
   | 'dispute-protocol'
   | 'ethics-gate'
   | 'trust-score'
+  | 'specgap'
   | 'omega-record';
 
 export type CanonicalShapeName =
@@ -18,6 +19,7 @@ export type CanonicalShapeName =
   | 'DisputeFinding'
   | 'EthicsReview'
   | 'TrustScore'
+  | 'AssuranceResult'
   | 'OmegaRecord';
 
 export type DataAvailability =

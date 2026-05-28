@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://omegaprotocol.org/schemas/specgap-assurance-summary.schema.json",
+  "title": "SpecgapAssuranceSummary",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "encoding_version",
+    "extractor_mode",
+    "intent_empty",
+    "semantic_divergence_count",
+    "high_severity_divergence_count",
+    "failed_implication_checks",
+    "implication_checks_total",
+    "inconsistent_layers",
+    "triangulation_any_disagreement"
+  ],
+  "properties": {
+    "encoding_version": {
+      "const": "sandbox-propositional/1.0"
+    },
+    "extractor_mode": {
+      "type": "string",
+      "enum": ["rule", "fuzzy"]
+    },
+    "intent_empty": {
+      "type": "boolean"
+    },
+    "semantic_divergence_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "high_severity_divergence_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "failed_implication_checks": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "implication_checks_total": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "inconsistent_layers": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "triangulation_any_disagreement": {
+      "type": "boolean"
+    }
+  }
+}

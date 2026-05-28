@@ -58,6 +58,7 @@ const CANONICAL_SCHEMA_BY_SHAPE: Record<string, string> = {
   DisputeFinding: 'dispute-finding.schema.json',
   EthicsReview: 'ethics-review.schema.json',
   TrustScore: 'trust-score.schema.json',
+  AssuranceResult: 'assurance-result.schema.json',
   OmegaRecord: 'omega-record.schema.json',
 };
 
@@ -75,6 +76,8 @@ const SCHEMA_NAMES = [
   'dispute-finding.schema.json',
   'ethics-review.schema.json',
   'trust-score.schema.json',
+  'assurance-result.schema.json',
+  'specgap-assurance-summary.schema.json',
   'omega-record.schema.json',
 ];
 
@@ -265,6 +268,7 @@ function hasNullableFieldProvenance(shape: string, canonical: unknown): boolean 
     HarmRecord: ['max_severity', 'remediation_rate'],
     AssumptionGate: ['validation_ratio'],
     TrustScore: ['overall_score'],
+    AssuranceResult: ['triangulation_any_disagreement'],
   };
   const fields = fieldsByShape[shape] ?? [];
   if (fields.length === 0) {

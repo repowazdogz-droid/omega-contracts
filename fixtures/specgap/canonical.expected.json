@@ -1,0 +1,47 @@
+{
+  "kind": "specgap",
+  "producer_name": "specgap",
+  "producer_version": "0.1.0",
+  "input_fingerprint": "f34e84e282bbd74f002526b71674f645033b9a750fb56184c5c5d3c3eb5391d9",
+  "verdict": "divergence_detected",
+  "availability": {
+    "verdict": "available",
+    "input_fingerprint": "available",
+    "intent_empty": "available",
+    "semantic_divergence_count": "available",
+    "failed_implication_checks": "available",
+    "triangulation_any_disagreement": "available",
+    "encoding_version": "available"
+  },
+  "specgap": {
+    "encoding_version": "sandbox-propositional/1.0",
+    "extractor_mode": "rule",
+    "intent_empty": false,
+    "semantic_divergence_count": 3,
+    "high_severity_divergence_count": 3,
+    "failed_implication_checks": 2,
+    "implication_checks_total": 2,
+    "inconsistent_layers": 0,
+    "triangulation_any_disagreement": false
+  },
+  "provenance": [
+    {
+      "field": "failed_implication_checks",
+      "method": "specgap.analyze_structured/1.0: counts.failed_implication_checks",
+      "inputs": [
+        "ingress"
+      ],
+      "confidence": 1,
+      "input_fingerprint": "f34e84e282bbd74f002526b71674f645033b9a750fb56184c5c5d3c3eb5391d9"
+    },
+    {
+      "field": "triangulation_any_disagreement",
+      "method": "specgap.analyze_structured/1.0: triangulation.any_disagreement",
+      "inputs": [
+        "ingress"
+      ],
+      "confidence": 1,
+      "input_fingerprint": "f34e84e282bbd74f002526b71674f645033b9a750fb56184c5c5d3c3eb5391d9"
+    }
+  ]
+}
