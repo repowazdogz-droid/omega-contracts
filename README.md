@@ -2,47 +2,6 @@
 
 Canonical interoperability substrate for OMEGA protocol libraries. This package defines the shared TypeScript types, JSON Schemas, canonical encoding helpers, fixtures, test vector, adapter contract, and conformance runner used by the OMEGA protocol stack. It is not a runtime, router, engine, service, or implementation of any protocol's native logic.
 
-**This package validates governed evidence records; it does not decide whether an action should proceed.**
-
-## Position in OMEGA Lab
-
-Public lab entry: [github.com/repowazdogz-droid/repowazdogz-droid](https://github.com/repowazdogz-droid/repowazdogz-droid)
-
-**Sibling adapters shipped today:** [clearpath](https://github.com/repowazdogz-droid/clearpath), [consent-ledger](https://github.com/repowazdogz-droid/consent-ledger), [assumption-registry](https://github.com/repowazdogz-droid/assumption-registry) — see [docs/TRUST_STACK.md](./docs/TRUST_STACK.md).
-
-| Doc | Purpose |
-| --- | --- |
-| [docs/TRUST_STACK.md](./docs/TRUST_STACK.md) | How sibling repos map into `OmegaRecord` |
-| [docs/PRIMITIVE_MAP.md](./docs/PRIMITIVE_MAP.md) | Primitive → field → honest implementation status |
-| [docs/ASSURANCE_BOUNDARY.md](./docs/ASSURANCE_BOUNDARY.md) | Guarantees, non-guarantees, TCB, failure modes |
-
-```mermaid
-flowchart LR
-  subgraph Doctrine
-    LEAN[omega-lean-proof]
-  end
-  subgraph Assurance
-    SG[specgap]
-  end
-  subgraph Replay
-    CP[clearpath]
-  end
-  subgraph Authority
-    CL[consent-ledger]
-  end
-  subgraph Materiality
-    AR[assumption-registry]
-  end
-  LEAN -.->|conceptual| OR
-  SG -.->|pre-runtime evidence| OR
-  CP --> OR
-  CL --> OR
-  AR --> OR
-  OR[("OmegaRecord\n@omega-protocol/contracts")]
-```
-
-**A valid `OmegaRecord` proves record conformance, not real-world correctness.**
-
 ## Installation
 
 ```bash
@@ -118,7 +77,7 @@ Locked test vector hash:
 
 ## Specification
 
-Normative shapes and composition rules live in this repository (`schemas/`, `src/`, `docs/`). Narrative specification and formal proof context: [omegaprotocol.org](https://omegaprotocol.org) · [contracts homepage](https://omegaprotocol.org/contracts/).
+Full specification will be published at https://omegaprotocol.org/contracts/.
 
 ## License
 

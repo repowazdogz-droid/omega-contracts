@@ -81,6 +81,12 @@
     "trust": {
       "$ref": "trust-score.schema.json"
     },
+    "reasoning": {
+      "$ref": "reasoning-chain.schema.json"
+    },
+    "expectation": {
+      "$ref": "expectation.schema.json"
+    },
     "outcome": {
       "type": "object",
       "additionalProperties": false,

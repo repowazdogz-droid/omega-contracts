@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://omegaprotocol.org/schemas/expectation.schema.json",
+  "title": "Expectation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "predicted_outcome",
+    "committed_before_action"
+  ],
+  "properties": {
+    "predicted_outcome": {
+      "type": "string"
+    },
+    "committed_before_action": {
+      "type": "boolean"
+    },
+    "materiality_node": {
+      "type": "string"
+    },
+    "provenance": {
+      "type": "array",
+      "items": {
+        "$ref": "derived-field-provenance.schema.json"
+      }
+    }
+  }
+}

@@ -8,6 +8,26 @@ import type { HarmRecord } from './harm.js';
 import type { DerivedFieldProvenance, ProtocolId } from './shared.js';
 import type { TrustScore } from './trust.js';
 
+export interface ReasoningNode {
+  id: string;
+  type: 'FACT' | 'INFERENCE' | 'ASSUMPTION' | 'UNKNOWN';
+  statement: string;
+}
+
+export interface ReasoningChain {
+  nodes: ReasoningNode[];
+  edges: Array<{ from: string; to: string }>;
+  acyclic: boolean;
+  provenance?: DerivedFieldProvenance[];
+}
+
+export interface Expectation {
+  predicted_outcome: string;
+  committed_before_action: boolean;
+  materiality_node?: string;
+  provenance?: DerivedFieldProvenance[];
+}
+
 export interface OmegaRecord {
   record_id: string;
   schema_version: 'omega/1.0';
@@ -27,6 +47,8 @@ export interface OmegaRecord {
   dispute?: DisputeFinding;
   ethics?: EthicsReview;
   trust?: TrustScore;
+  reasoning?: ReasoningChain;
+  expectation?: Expectation;
   outcome: {
     gate_result: 'COMMITTED' | 'HELD' | 'ESCALATED';
     gate_reason: string;
