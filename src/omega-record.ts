@@ -8,26 +8,6 @@ import type { HarmRecord } from './harm.js';
 import type { DerivedFieldProvenance, ProtocolId } from './shared.js';
 import type { TrustScore } from './trust.js';
 
-export interface ReasoningNode {
-  id: string;
-  type: 'FACT' | 'INFERENCE' | 'ASSUMPTION' | 'UNKNOWN';
-  statement: string;
-}
-
-export interface ReasoningChain {
-  nodes: ReasoningNode[];
-  edges: Array<{ from: string; to: string }>;
-  acyclic: boolean;
-  provenance?: DerivedFieldProvenance[];
-}
-
-export interface Expectation {
-  predicted_outcome: string;
-  committed_before_action: boolean;
-  materiality_node?: string;
-  provenance?: DerivedFieldProvenance[];
-}
-
 export interface OmegaRecord {
   record_id: string;
   schema_version: 'omega/1.0';
@@ -47,14 +27,32 @@ export interface OmegaRecord {
   dispute?: DisputeFinding;
   ethics?: EthicsReview;
   trust?: TrustScore;
-  reasoning?: ReasoningChain;
-  expectation?: Expectation;
   outcome: {
     gate_result: 'COMMITTED' | 'HELD' | 'ESCALATED';
     gate_reason: string;
     acted: boolean;
     non_action_record?: string;
     blocked_by?: ProtocolId;
+    /**
+     * Human-oversight disposition. Audit-bound, NOT a self-certifying bypass:
+     * `f` (see gate-evaluator.ts) clears an escalation only when the disposition
+     * is `approved` AND guards G1 (separation: approver_id ≠ actor_id),
+     * G2 (scoping: trigger ∈ cleared_triggers), G3 (anti-transplant:
+     * gate_input_digest matches the record's recomputed evidence digest) and
+     * G4 (cryptographic attestation) all hold. G4 is fail-closed until the
+     * signature layer (build step 3) ships. There is deliberately no
+     * `obtained`/`required` boolean — presence of an attested `approved`
+     * disposition is the only thing that clears, and only for clearable
+     * triggers {R1, R2, R6, R7}; hard blocks {R3, R4, R5} are never clearable.
+     */
+    human_oversight?: {
+      disposition: 'approved' | 'rejected';
+      approver_id: string;
+      cleared_triggers: string[];
+      gate_input_digest: string;
+      oversight_record_ref: string;
+      attestation: string;
+    };
   };
   provenance?: DerivedFieldProvenance[];
   previous_hash: string | null;

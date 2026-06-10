@@ -115,6 +115,46 @@
         },
         "blocked_by": {
           "$ref": "protocol-id.schema.json"
+        },
+        "human_oversight": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "disposition",
+            "approver_id",
+            "cleared_triggers",
+            "gate_input_digest",
+            "oversight_record_ref",
+            "attestation"
+          ],
+          "properties": {
+            "disposition": {
+              "type": "string",
+              "enum": [
+                "approved",
+                "rejected"
+              ]
+            },
+            "approver_id": {
+              "type": "string"
+            },
+            "cleared_triggers": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "gate_input_digest": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "oversight_record_ref": {
+              "type": "string"
+            },
+            "attestation": {
+              "type": "string"
+            }
+          }
         }
       }
     },

@@ -6,6 +6,7 @@ export * from './consent.js';
 export * from './dispute.js';
 export * from './encoding.js';
 export * from './ethics.js';
+export * from './gate-evaluator.js';
 export * from './harm.js';
 export * from './omega-record.js';
 export * from './shared.js';
