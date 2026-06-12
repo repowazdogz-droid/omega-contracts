@@ -23,7 +23,7 @@ This document maps **named OMEGA primitives** (as used in doctrine and the publi
 | **P3 Traceability / hash chain** | Records are append-only and hash-linked; tamper breaks the chain | `previous_hash`, `content_hash`; slot-level `*.provenance[]`; `clearpath.verification_failures` | **schema-only** at record level; **implemented in sibling repo** (`clearpath` trace verify); Lean `OmegaP3Semantic` models chain (with crypto axiom) | Hash match verifies encoding linkage, not that upstream native traces were honest |
 | **P4 Expectation** | Stakeholder expectations are explicit and checkable | No dedicated P4 slot; related signals in `clearpath` (alternatives, faithfulness) and assurance outputs | **not implemented** as P4; partial analogues in **implemented in sibling repo** (`clearpath`) and **Assurance** (`specgap`) | Expectation satisfaction is not proven by record shape alone |
 | **P4M Materiality** | Load-bearing assumptions and stakes-aware materiality are surfaced before action | `subject.stakes`; `assumption` → `AssumptionGate` (`load_bearing_count`, `pre_action_gate`, …) | **implemented in sibling repo** (`assumption-registry` adapter shipped); `pre_action_gate` is a **report label**, not an enforced block in this package | `pre_action_gate: block` in a summary does not stop execution without an external gate |
-| **P5 Confirmation / gate state** | Materiality threshold met → `COMMITTED`; not met → `HELD`; escalation path → `ESCALATED` | `outcome.gate_result`, `outcome.gate_reason`, `outcome.acted`, `outcome.non_action_record`, `outcome.blocked_by` | **schema-only** — **no public gate library** evaluates thresholds and writes gate outcomes today | **`HELD` / `COMMITTED` / `ESCALATED` in a record is an encoding of a claim**, not proof that a gate ran correctly |
+| **P5 Confirmation / gate state** | Materiality threshold met → `COMMITTED`; not met → `HELD`; escalation path → `ESCALATED` | `outcome.gate_result`, `outcome.gate_reason`, `outcome.acted`, `outcome.non_action_record`, `outcome.blocked_by` | **evaluator published** (`src/gate-evaluator.ts`; Lean mirror `OmegaP5Gate.lean`) — `gate_result` is **externally re-checkable** as a deterministic function of recorded evidence; **not enforced at record-emission time** | A record may still be emitted with a `gate_result` the evaluator would reject — the evaluator **detects** the mismatch, it does not **prevent** emission |
 | **P5E Execution attestation** | Acted vs not-acted is recorded with reason | `outcome.acted`, `outcome.gate_reason`, `outcome.non_action_record` | **schema-only** | Self-reported execution status unless bound to external telemetry |
 | **P6 Delegation** | Agent actions stay within human-granted scope | `consent` → `ConsentRecord` (violations, scope creep flags, chain verified) | **implemented in sibling repo** (`consent-ledger` adapter shipped) | Matcher results are structural over recorded authorisations/actions, not legal delegation proof |
 | **P10 Competence attestation** | Competence evidence attached where available | `trust` → `TrustScore`; optional `cognitive` → `CognitiveProfile` (not trunk-promoted) | **fixture-only** for composition; **implemented in sibling repo** (`trust-score`, `cognitive-ledger`) as derived summaries | Scores and profiles are **evidence summaries**, not certifications |
@@ -38,11 +38,11 @@ Public repositories today provide:
 
 1. **Types and JSON Schema** for `outcome.gate_result` ∈ `COMMITTED` | `HELD` | `ESCALATED`
 2. **Fixtures** showing example gate outcomes in a composed record
-3. **No shipped gate evaluator** that computes gate state from materiality, assumptions, consent, or stakes
+3. **A published gate evaluator** (`src/gate-evaluator.ts`): the deterministic R1–R22 function `f` over recorded evidence, with a Lean mirror (`OmegaP5Gate.lean`) carrying kernel-verified no-false-COMMIT, hard-block, and fail-closed theorems with no user axioms. A verifier can recompute `f(record)` and confirm it equals the recorded `gate_result`.
 
-Integrators may set `outcome` fields manually or via private runtime code. **This package does not validate that a gate algorithm ran.**
+What `f` does **not** do: it is **not enforced at record-emission time**. A record may be written with any `gate_result` — including one `f` would reject — by manual entry or private runtime code. `f` lets a verifier **detect** such a mismatch after the fact; it does not **prevent** the record from being emitted. `f` also does not prove the recorded inputs were true, that this policy is the mandated policy, or that a demanded human escalation actually occurred. Oversight-clearing of clearable escalations is **fail-closed** (guard G4) pending the signature/attestation layer, so `ESCALATED` is in effect still absorbing today.
 
-A record with `gate_result: 'COMMITTED'` is **schema-valid** and may still represent a decision that should have been `HELD`.
+A record with `gate_result: 'COMMITTED'` is **schema-valid** even when `f` would return `HELD` or `ESCALATED`; the published evaluator is what makes that discrepancy externally checkable.
 
 ---
 
@@ -70,7 +70,7 @@ Conformance interface: `ProtocolAdapter` in `src/adapter.ts`.
 | **Lean** (`omega-lean-proof`) | Named `Prop` predicates and sufficiency/necessity lemmas over those definitions |
 | **Contracts** (this package) | Record shapes and composition rules |
 | **Sibling libraries** | Native hash chains, summaries, and reports |
-| **Runtime gate** | **Not public** — required for honest P5 claims beyond schema |
+| **Runtime gate** | **Evaluator public** (`src/gate-evaluator.ts`, Lean-mirrored) — re-checkable `f` over recorded evidence; **emission-time enforcement / attested oversight clearing still pending** (G4 fail-closed) |
 
 See [omega-lean-proof docs/OPERATIONAL_GAP.md](https://github.com/repowazdogz-droid/omega-lean-proof) when published; until then, treat Lean as **doctrine**, not deployment attestation.
 

@@ -15,7 +15,7 @@ package.
 Live. Package version **`0.2.2`**. HEAD `b926b76` ("docs: add trust-stack
 composition, primitive mapping, and assurance boundaries"). Published from
 `dist/` (pre-built CommonJS-typed ESM). Locked composition test-vector hash:
-`152eab926412e397dfdd56217dad03a924bc9c138bee2ceafa2f3200c3d2c705`.
+`ad7bfe01539227981c48acb52d2731e276be72e64611310596d898445925dcf0`.
 
 ## STACK
 - TypeScript 5.9, `"type": "module"` (ESM).
@@ -100,10 +100,13 @@ composition, primitive mapping, and assurance boundaries"). Published from
   — do not delete it without re-running `npm run build`. The CLI shebang
   must survive `tsc` (handled by `scripts/postbuild.mjs`; see commit
   `e184164` for the historical fix).
-- Test vector hash `152eab9264…c3d2c705` is **locked**. Any change to canonical
-  encoding (`src/encoding.ts`), the omega-record schema, or composition
-  inputs will change this hash — that is an intentional break and requires
-  bumping the schema version (`omega/1.0`) plus coordinating sibling repos.
+- Test vector hash `ad7bfe0153…5925dcf0` is **locked**. Any change to canonical
+  encoding (`src/encoding.ts`), the omega-record schema, the composition
+  inputs, or the recorded `outcome` block will change this hash — that is an
+  intentional break and requires coordinating sibling repos (and the
+  documents-build worked examples that quote it). Prior vector `152eab9264…`
+  recorded a false-COMMIT (gate_result COMMITTED while ethics
+  requires_human_review = 1); reconciled to ESCALATED (R2) on 2026-06-12.
 - `node_modules/` and `dist/` exist in the working tree — do not commit
   rebuilds without intent.
 - Do not put runtime business logic here. This package validates;

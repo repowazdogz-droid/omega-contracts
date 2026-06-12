@@ -72,7 +72,7 @@ JSON Schemas in `schemas/` are the cross-language source of truth. Fixtures in `
 Locked test vector hash:
 
 ```text
-152eab926412e397dfdd56217dad03a924bc9c138bee2ceafa2f3200c3d2c705
+ad7bfe01539227981c48acb52d2731e276be72e64611310596d898445925dcf0
 ```
 
 ## Specification

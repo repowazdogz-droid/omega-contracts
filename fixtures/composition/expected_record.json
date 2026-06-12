@@ -362,10 +362,11 @@
     ]
   },
   "outcome": {
-    "gate_result": "COMMITTED",
-    "gate_reason": "Assumption gate returned caution; consent verified; ethics review had no blocking critical flag; non-surgical recommendation committed.",
-    "acted": true
+    "gate_result": "ESCALATED",
+    "gate_reason": "Ethics review recorded requires_human_review = 1 (rule R2): an oversight review path was triggered and no attested oversight approval cleared it (fail-closed). Escalated pending human review; recommendation not committed.",
+    "acted": false,
+    "non_action_record": "Recommendation withheld pending human ethics review. The R2 escalation stands because ethics.outcome_distribution.requires_human_review = 1 and no attested human_oversight approval is present; unacknowledged_flags = 1 would also bar a commit (R12). Action deferred to oversight."
   },
   "previous_hash": null,
-  "content_hash": "152eab926412e397dfdd56217dad03a924bc9c138bee2ceafa2f3200c3d2c705"
+  "content_hash": "ad7bfe01539227981c48acb52d2731e276be72e64611310596d898445925dcf0"
 }

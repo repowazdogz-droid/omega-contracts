@@ -303,17 +303,17 @@ describe('P5 gate evaluator — f', () => {
     });
   });
 
-  // ── (f) composition fixture is a KNOWN COUNTEREXAMPLE ─────────────────────
-  it('(f) composition fixture evaluates to ESCALATED (R2) — KNOWN COUNTEREXAMPLE to its recorded COMMITTED', () => {
+  // ── (f) composition fixture is CONSISTENT with f ─────────────────────────
+  it('(f) composition fixture records ESCALATED (R2) and f agrees — recorded gate_result is re-checkable', () => {
     const fixture = JSON.parse(
       readFileSync(new URL('../fixtures/composition/expected_record.json', import.meta.url), 'utf8'),
     ) as OmegaRecord;
 
-    // The fixture is NOT modified. We assert the honest mismatch:
-    expect(fixture.outcome.gate_result).toBe('COMMITTED'); // what is recorded
+    // The recorded outcome and the deterministic evaluator now agree:
+    expect(fixture.outcome.gate_result).toBe('ESCALATED'); // what is recorded
     const evaluated = evaluateGate(fixture);
     expect(evaluated).toMatchObject({ result: 'ESCALATED', rule: 'R2' }); // what f says
-    expect(evaluated.result).not.toBe(fixture.outcome.gate_result); // documented inconsistency
+    expect(evaluated.result).toBe(fixture.outcome.gate_result); // recorded == recomputed
   });
 });
 
