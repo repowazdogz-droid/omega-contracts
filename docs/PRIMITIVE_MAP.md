@@ -29,6 +29,7 @@ This document maps **named OMEGA primitives** (as used in doctrine and the publi
 | **P10 Competence attestation** | Competence evidence attached where available | `trust` → `TrustScore`; optional `cognitive` → `CognitiveProfile` (not trunk-promoted) | **fixture-only** for composition; **implemented in sibling repo** (`trust-score`, `cognitive-ledger`) as derived summaries | Scores and profiles are **evidence summaries**, not certifications |
 | **P11 Expectation update integrity** | Expectation updates are recorded when beliefs change | No dedicated slot | **not implemented** in public stack | — |
 | **P12 Semantic integrity validation** | Semantic drift across layers is detected | No dedicated slot; closest public tool: **Assurance** (`specgap`) | **implemented in sibling repo** (`specgap`, pre-runtime); **not implemented** inside `OmegaRecord` pipeline | SpecGap checks abstract spec layers, not live record semantics |
+| **P_VersionProvenance** (generation provenance) | The model/prompt that produced the record is declared and externally checkable | `generation` → `{ model_id, model_version, prompt_hash?, tool_versions? }` | **predicate published + kernel-verified** (`src/provenance.ts` `hasVersionProvenance`; Lean mirror `OmegaProvenance.lean`, zero user axioms) — presence + well-formed `prompt_hash` commitment only; optional block, absence detectable | Does NOT prove the declared model produced the record nor that `prompt_hash` commits the real prompt (actor-binding / signature layer); excluded from `gate_input_digest`, bound to `content_hash` |
 
 ---
 
@@ -58,6 +59,7 @@ A record with `gate_result: 'COMMITTED'` is **schema-valid** even when `f` would
 | `trust` | trust-score | **not shipped** |
 | `cognitive` | cognitive-ledger | **not shipped** (non-trunk) |
 | `ethics` | ethics-gate | **not shipped** (non-trunk) |
+| `generation` | — | **caller-supplied** — no sibling adapter populates it; the `hasVersionProvenance` predicate checks presence/well-formedness only |
 
 Conformance interface: `ProtocolAdapter` in `src/adapter.ts`.
 
