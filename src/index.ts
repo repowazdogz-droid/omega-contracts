@@ -9,5 +9,6 @@ export * from './ethics.js';
 export * from './gate-evaluator.js';
 export * from './harm.js';
 export * from './omega-record.js';
+export * from './provenance.js';
 export * from './shared.js';
 export * from './trust.js';

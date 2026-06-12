@@ -27,6 +27,40 @@ export interface OmegaRecord {
   dispute?: DisputeFinding;
   ethics?: EthicsReview;
   trust?: TrustScore;
+  /**
+   * Generation provenance — the AI generator that produced this record
+   * (P_VersionProvenance). OPTIONAL: a record without this block stays
+   * schema-valid (pre-1.4.1 records carry none, and the locked composition
+   * vector does not). The `hasVersionProvenance` predicate EVALUATES presence;
+   * it is not schema-forced. Bound to `content_hash` like every other field,
+   * so tampering with declared provenance already breaks the P3 chain.
+   *
+   * HONEST SCOPE: presence + well-formedness of declared generator identifiers
+   * (and `prompt_hash` shape) only. It does NOT prove the declared model
+   * actually produced this record, nor that `prompt_hash` commits the real
+   * prompt — that is actor-binding / cryptographic attestation (the signature
+   * layer), the same trust hole as the unsigned `actor_id`.
+   *
+   * Deliberately EXCLUDED from `gate_input_digest` (see gate-evaluator.ts):
+   * `f` does not read `generation`, so it stays out of the "exactly what `f`
+   * reads" evidence subset. This is NOT a transplant hole: two records identical
+   * in subject+evidence but differing only in `generation` share a
+   * gate_input_digest, yet an oversight approval cannot be transplanted between
+   * them — that is blocked by G4 (the attestation message binds `record_id`),
+   * not by G3 (the digest), and today additionally by G4 being fail-closed.
+   */
+  generation?: {
+    model_id: string;
+    model_version: string;
+    /**
+     * sha256 (lowercase hex) over the RFC 8785 (JCS) canonicalization of the
+     * declared prompt payload — identical to `fingerprint()` in encoding.ts.
+     * A verifier holding the prompt payload recomputes `fingerprint(payload)`
+     * and compares. A commitment, not a free string.
+     */
+    prompt_hash?: string;
+    tool_versions?: Record<string, string>;
+  };
   outcome: {
     gate_result: 'COMMITTED' | 'HELD' | 'ESCALATED';
     gate_reason: string;
